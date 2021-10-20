@@ -3,5 +3,6 @@ require 'sinatra/reloader'
 configure :development do
   enable :reloader
 end
+require_relative './app/currency_conversion'
 
-require_relative './routes/base'
+run CurrencyConversion.new
