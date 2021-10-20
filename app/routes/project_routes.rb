@@ -1,20 +1,35 @@
 module ProjectRoutes
   def self.extended(base)
     base.class_exec do
+      before '/projects/:id' do
+        key = params[:key]
+        project = Project.find(params[:id])
+        unless project && project.api_key == key
+          halt 401, {'Content-Type' => 'text/plain'}, "Sorry your api key doesn't match"
+        end
+      end
+
       get '/projects' do
-        # return all the projects
+        Project.all.to_json
       end
 
       post '/projects' do
-        # create a project
+        title = params[:title]
+        api_key = SecureRandom.hex(15)
+        project = Project.create(title: title, api_key: api_key)
+        project.to_json
       end
 
-      put '/project/:id' do
-        # update the project
+      put '/projects/:id' do
+        project = Project.find(params[:id])
+        project.update(title: params[:title])
+        project.to_json
       end
 
-      delete '/project/:id' do
-        # delete the project
+      delete '/projects/:id' do
+        project = Project.find(params[:id])
+        project.destroy
+        project.to_json
       end
     end
   end
