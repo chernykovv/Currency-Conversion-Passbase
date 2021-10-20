@@ -15,8 +15,7 @@ module ProjectRoutes
 
       post '/projects' do
         title = params[:title]
-        api_key = SecureRandom.hex(15)
-        project = Project.create(title: title, api_key: api_key)
+        project = Project.create(title: title)
         project.to_json
       end
 

@@ -12,3 +12,9 @@ group :development do
   gem 'sinatra-contrib'
   gem 'pg'
 end
+
+group :test do
+  gem "rspec"
+  gem "rack-test"
+  gem 'database_cleaner-active_record'
+end
