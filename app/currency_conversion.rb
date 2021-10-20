@@ -4,6 +4,10 @@ require_relative './routes/project_routes'
 require_relative './routes/currency_conversion_routes'
 require_relative './models/project'
 
+require 'net/http'
+require 'uri'
+require 'json'
+
 class CurrencyConversion < Sinatra::Base
   register Sinatra::Reloader
   get '/' do
