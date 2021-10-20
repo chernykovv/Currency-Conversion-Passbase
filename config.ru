@@ -1,5 +1,9 @@
+require 'bundler'
+Bundler.require
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/activerecord'
+
 configure :development do
   enable :reloader
 end
